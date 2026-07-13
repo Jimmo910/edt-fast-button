@@ -51,7 +51,7 @@
 
   <properties>
     <tycho.version>4.0.5</tycho.version>
-    <checkstyle.version>11.0.0</checkstyle.version>
+    <checkstyle.version>13.8.0</checkstyle.version>
     <jacoco.version>0.8.15</jacoco.version>
     <maven.checkstyle.version>3.6.0</maven.checkstyle.version>
     <maven.dependency.version>3.11.0</maven.dependency.version>
