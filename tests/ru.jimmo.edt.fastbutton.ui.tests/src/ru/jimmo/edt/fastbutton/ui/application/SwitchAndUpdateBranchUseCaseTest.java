@@ -59,11 +59,13 @@ public class SwitchAndUpdateBranchUseCaseTest
             @Override
             public void beginTask(String title, int totalWork)
             {
+                // Progress reporting is irrelevant to these validation tests.
             }
 
             @Override
             public void worked(int completed)
             {
+                // Progress reporting is irrelevant to these validation tests.
             }
 
             @Override
