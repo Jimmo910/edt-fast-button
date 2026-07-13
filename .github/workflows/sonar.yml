@@ -18,6 +18,7 @@ concurrency:
 
 jobs:
   analyze:
+    name: SonarQube Cloud analysis
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
