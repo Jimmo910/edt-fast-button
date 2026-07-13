@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Fast Button UI Tests
+Bundle-SymbolicName: ru.jimmo.edt.fastbutton.ui.tests
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Jimmo910
+Fragment-Host: ru.jimmo.edt.fastbutton.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Automatic-Module-Name: ru.jimmo.edt.fastbutton.ui.tests
+Import-Package: org.junit;version="4.13.0"

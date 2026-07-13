@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: EPL-2.0
+name: SonarQube Cloud
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: sonar-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Explain inactive analysis
+        if: env.SONAR_TOKEN == ''
+        run: echo "SonarQube Cloud analysis is waiting for the SONAR_TOKEN repository secret."
+
+      - name: Build and analyze
+        if: env.SONAR_TOKEN != ''
+        run: mvn -B -ntp clean verify sonar:sonar

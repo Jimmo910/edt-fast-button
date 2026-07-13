@@ -1,0 +1,40 @@
+name: Bug report
+description: Report reproducible incorrect behavior.
+title: '[Bug]: '
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, private repository URLs, or sensitive source code.
+  - type: input
+    id: version
+    attributes:
+      label: Fast Button version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: edt-version
+    attributes:
+      label: EDT version
+      placeholder: 2025.2.x
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Include expected behavior and minimal reproduction steps.
+    validations:
+      required: true
+  - type: textarea
+    id: repository-state
+    attributes:
+      label: Relevant Git state
+      description: Describe branch/upstream state without sharing private URLs or code.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Remove usernames, local paths, tokens, and repository URLs before pasting logs.
+      render: text

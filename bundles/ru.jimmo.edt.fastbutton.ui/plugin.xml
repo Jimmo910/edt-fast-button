@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: EPL-2.0 -->
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="ru.jimmo.edt.fastbutton.ui.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages">
+      <page
+            class="ru.jimmo.edt.fastbutton.ui.preferences.FastButtonPreferencePage"
+            id="ru.jimmo.edt.fastbutton.ui.preferences"
+            name="%preferencePage.name">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="ru.jimmo.edt.fastbutton.ui.handlers.SwitchAndUpdateBranchHandler"
+            id="ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch"
+            name="%switchAndUpdate.command.name">
+      </command>
+   </extension>
+
+   <extension point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com._1c.g5.v8.dt.navigator.ui.navigator.popup?before=group.new">
+         <command
+               commandId="ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <and>
+                  <count value="1"/>
+                  <iterate ifEmpty="false" operator="and">
+                     <and>
+                        <instanceof value="org.eclipse.core.resources.IProject"/>
+                        <test
+                              forcePluginActivation="true"
+                              property="GitResource.isShared">
+                        </test>
+                     </and>
+                  </iterate>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+</plugin>

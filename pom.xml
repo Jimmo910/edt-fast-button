@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>ru.jimmo.edt.fastbutton</groupId>
+    <artifactId>bom</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <relativePath>./bom/pom.xml</relativePath>
+  </parent>
+
+  <groupId>ru.jimmo.edt.fastbutton</groupId>
+  <artifactId>parent</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Fast Button</name>
+
+  <properties>
+    <sonar.organization>jimmo910</sonar.organization>
+    <sonar.projectKey>Jimmo910_edt-fast-button</sonar.projectKey>
+    <sonar.projectName>Fast Button</sonar.projectName>
+    <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/coverage/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+  </properties>
+
+  <modules>
+    <module>targets</module>
+    <module>bundles</module>
+    <module>tests</module>
+    <module>features</module>
+    <module>repositories</module>
+    <module>coverage</module>
+  </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>5.7.0.6970</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

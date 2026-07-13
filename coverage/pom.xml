@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>ru.jimmo.edt.fastbutton</groupId>
+    <artifactId>bom</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <relativePath>../bom/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>coverage</artifactId>
+  <packaging>jar</packaging>
+
+  <name>Coverage Verification</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>ru.jimmo.edt.fastbutton</groupId>
+      <artifactId>ru.jimmo.edt.fastbutton.ui</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-production-classes</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>ru.jimmo.edt.fastbutton</groupId>
+                  <artifactId>ru.jimmo.edt.fastbutton.ui</artifactId>
+                  <version>0.1.0-SNAPSHOT</version>
+                  <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                  <includes>ru/jimmo/edt/fastbutton/ui/**/*.class</includes>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>coverage-report</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <dataFile>${maven.multiModuleProjectDirectory}/tests/ru.jimmo.edt.fastbutton.ui.tests/target/jacoco.exec</dataFile>
+              <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>coverage-threshold</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <dataFile>${maven.multiModuleProjectDirectory}/tests/ru.jimmo.edt.fastbutton.ui.tests/target/jacoco.exec</dataFile>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <includes>
+                    <include>ru.jimmo.edt.fastbutton.ui.application.*</include>
+                    <include>ru.jimmo.edt.fastbutton.ui.infrastructure.git.*</include>
+                  </includes>
+                  <limits>
+                    <limit>
+                      <counter>LINE</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>0.70</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
