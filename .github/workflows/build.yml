@@ -36,7 +36,7 @@ jobs:
         run: mvn -B -ntp clean verify
 
       - name: Upload p2 update site
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: fast-button-update-site
           path: repositories/ru.jimmo.edt.fastbutton.repository/target/ru.jimmo.edt.fastbutton.repository.zip
@@ -45,7 +45,7 @@ jobs:
 
       - name: Upload coverage report
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-report
           path: coverage/target/site/jacoco/
