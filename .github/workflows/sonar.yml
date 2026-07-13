@@ -37,10 +37,17 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Explain inactive analysis
-        if: env.SONAR_TOKEN == ''
-        run: echo "SonarQube Cloud analysis is waiting for the SONAR_TOKEN repository secret."
+      - name: Validate Sonar authentication
+        shell: bash
+        run: |
+          if [[ -z "$SONAR_TOKEN" ]]; then
+            echo "::error::SONAR_TOKEN is missing or empty."
+            exit 1
+          fi
 
       - name: Build and analyze
-        if: env.SONAR_TOKEN != ''
-        run: mvn -B -ntp clean verify sonar:sonar
+        run: >-
+          mvn -B -ntp
+          -Dsonar.qualitygate.wait=true
+          -Dsonar.qualitygate.timeout=300
+          clean verify sonar:sonar
