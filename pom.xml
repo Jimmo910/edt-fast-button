@@ -22,6 +22,7 @@
     <sonar.organization>jimmo910</sonar.organization>
     <sonar.projectKey>Jimmo910_edt-fast-button</sonar.projectKey>
     <sonar.projectName>Fast Button</sonar.projectName>
+    <sonar.java.source>17</sonar.java.source>
     <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/coverage/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
 

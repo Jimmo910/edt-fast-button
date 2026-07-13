@@ -41,38 +41,39 @@ public final class GitRepositoryContextResolver
         }
 
         Repository repository = selectedBuilder.setMustExist(true).build();
-        boolean contextCreated = false;
         try
         {
-            Path repositoryKey = repositoryKey(repository.getDirectory());
-            List<IProject> mappedProjects = new ArrayList<>();
-            for (IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects())
-            {
-                if (!project.isAccessible() || !isSharedWithGit(project))
-                {
-                    continue;
-                }
-                FileRepositoryBuilder projectBuilder = findRepository(project);
-                if (projectBuilder != null && repositoryKey.equals(repositoryKey(projectBuilder.getGitDir())))
-                {
-                    mappedProjects.add(project);
-                }
-            }
-            if (!mappedProjects.contains(selectedProject))
-            {
-                mappedProjects.add(selectedProject);
-            }
-            GitRepositoryContext context = new GitRepositoryContext(repository, mappedProjects);
-            contextCreated = true;
-            return Optional.of(context);
+            return Optional.of(createContext(repository, selectedProject));
         }
-        finally
+        catch (IOException | RuntimeException | Error e)
         {
-            if (!contextCreated)
+            repository.close();
+            throw e;
+        }
+    }
+
+    private static GitRepositoryContext createContext(Repository repository, IProject selectedProject)
+        throws IOException
+    {
+        Path repositoryKey = repositoryKey(repository.getDirectory());
+        List<IProject> mappedProjects = new ArrayList<>();
+        for (IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects())
+        {
+            if (!project.isAccessible() || !isSharedWithGit(project))
             {
-                repository.close();
+                continue;
+            }
+            FileRepositoryBuilder projectBuilder = findRepository(project);
+            if (projectBuilder != null && repositoryKey.equals(repositoryKey(projectBuilder.getGitDir())))
+            {
+                mappedProjects.add(project);
             }
         }
+        if (!mappedProjects.contains(selectedProject))
+        {
+            mappedProjects.add(selectedProject);
+        }
+        return new GitRepositoryContext(repository, mappedProjects);
     }
 
     private static boolean isSharedWithGit(IProject project)

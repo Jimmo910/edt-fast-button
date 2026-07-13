@@ -95,7 +95,7 @@ public final class SwitchAndUpdateBranchHandler extends AbstractHandler implemen
                 context.close();
             }
         }
-        return null;
+        return Boolean.TRUE;
     }
 
     private static String detail(String value)

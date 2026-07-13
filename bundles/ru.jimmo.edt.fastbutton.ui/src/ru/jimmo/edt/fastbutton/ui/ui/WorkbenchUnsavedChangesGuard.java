@@ -36,17 +36,23 @@ public final class WorkbenchUnsavedChangesGuard
         {
             for (IWorkbenchPage page : window.getPages())
             {
-                for (IEditorPart editor : page.getDirtyEditors())
-                {
-                    IEditorInput input = editor.getEditorInput();
-                    IResource resource = input != null ? input.getAdapter(IResource.class) : null;
-                    if (resource == null || projects.contains(resource.getProject()))
-                    {
-                        dirtyEditors.add(editor.getTitle());
-                    }
-                }
+                collectDirtyEditors(page, projects, dirtyEditors);
             }
         }
         return dirtyEditors;
+    }
+
+    private static void collectDirtyEditors(IWorkbenchPage page, Set<IProject> projects,
+        Set<String> dirtyEditors)
+    {
+        for (IEditorPart editor : page.getDirtyEditors())
+        {
+            IEditorInput input = editor.getEditorInput();
+            IResource resource = input != null ? input.getAdapter(IResource.class) : null;
+            if (resource == null || projects.contains(resource.getProject()))
+            {
+                dirtyEditors.add(editor.getTitle());
+            }
+        }
     }
 }

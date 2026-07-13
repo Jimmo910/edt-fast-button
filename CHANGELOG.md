@@ -5,6 +5,14 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+### Changed
+
+- SonarQube Cloud now requires a real token, waits for the Quality Gate, and classifies the Tycho test bundle as test
+  code for accurate issues and coverage.
+- CI check names and Java 17 Dependabot constraints are explicit and suitable for branch protection.
+- Eclipse lifecycle, repository ownership, handler results, and unsaved-editor traversal were clarified without
+  changing user-visible behavior.
+
 ## [0.1.0] - 2026-07-13
 
 ### Added

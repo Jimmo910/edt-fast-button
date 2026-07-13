@@ -24,14 +24,19 @@ public class FastButtonPlugin extends AbstractUIPlugin
     public void start(BundleContext context) throws Exception
     {
         super.start(context);
-        plugin = this;
+        setPlugin(this);
     }
 
     @Override
     public void stop(BundleContext context) throws Exception
     {
-        plugin = null;
+        setPlugin(null);
         super.stop(context);
+    }
+
+    private static void setPlugin(FastButtonPlugin instance)
+    {
+        plugin = instance;
     }
 
     /**

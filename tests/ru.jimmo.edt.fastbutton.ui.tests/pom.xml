@@ -16,6 +16,12 @@
 
   <name>Fast Button UI Tests</name>
 
+  <properties>
+    <sonar.sources></sonar.sources>
+    <sonar.tests>src</sonar.tests>
+    <sonar.java.test.binaries>${project.build.outputDirectory}</sonar.java.test.binaries>
+  </properties>
+
   <build>
     <plugins>
       <plugin>
