@@ -45,7 +45,7 @@ public final class GitRepositoryContextResolver
         {
             return Optional.of(createContext(repository, selectedProject));
         }
-        catch (IOException | RuntimeException | Error e)
+        catch (IOException | RuntimeException e)
         {
             repository.close();
             throw e;

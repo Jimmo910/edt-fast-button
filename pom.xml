@@ -24,6 +24,14 @@
     <sonar.projectName>Fast Button</sonar.projectName>
     <sonar.java.source>17</sonar.java.source>
     <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/coverage/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    <sonar.coverage.exclusions>
+      **/ui/FastButtonPlugin.java,
+      **/ui/Messages.java,
+      **/ui/handlers/**,
+      **/ui/preferences/**,
+      **/ui/infrastructure/repository/**,
+      **/ui/ui/**
+    </sonar.coverage.exclusions>
   </properties>
 
   <modules>
