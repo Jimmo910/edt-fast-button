@@ -1,67 +1,57 @@
-# Fast Button
+# Быстрые кнопки
 
-[English](README.md) | [Русский](README_RU.md)
+[Русский](README.md) | [English](README_EN.md)
 
-[![Build](https://github.com/Jimmo910/edt-fast-button/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Jimmo910/edt-fast-button/actions/workflows/build.yml)
+[![Сборка](https://github.com/Jimmo910/edt-fast-button/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Jimmo910/edt-fast-button/actions/workflows/build.yml)
 [![CodeQL](https://github.com/Jimmo910/edt-fast-button/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Jimmo910/edt-fast-button/security/code-scanning)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=Jimmo910_edt-fast-button&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Jimmo910_edt-fast-button)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Jimmo910_edt-fast-button&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Jimmo910_edt-fast-button)
-[![Release](https://img.shields.io/github/v/release/Jimmo910/edt-fast-button?sort=semver)](https://github.com/Jimmo910/edt-fast-button/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/Jimmo910/edt-fast-button/total)](https://github.com/Jimmo910/edt-fast-button/releases)
-[![License: EPL-2.0](https://img.shields.io/badge/license-EPL--2.0-blue.svg)](LICENSE)
+[![Покрытие](https://sonarcloud.io/api/project_badges/measure?project=Jimmo910_edt-fast-button&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Jimmo910_edt-fast-button)
+[![Релиз](https://img.shields.io/github/v/release/Jimmo910/edt-fast-button?sort=semver)](https://github.com/Jimmo910/edt-fast-button/releases/latest)
+[![Загрузки](https://img.shields.io/github/downloads/Jimmo910/edt-fast-button/total)](https://github.com/Jimmo910/edt-fast-button/releases)
+[![Лицензия: EPL-2.0](https://img.shields.io/badge/license-EPL--2.0-blue.svg)](LICENSE)
 [![EDT 2025.2](https://img.shields.io/badge/1C%3AEDT-2025.2-orange.svg)](https://edt.1c.ru/)
 
-Fast Button is an open-source plug-in that adds safe, repeatable project actions to 1C:Enterprise Development Tools
-(EDT). Its UI is available in English and Russian.
+«Быстрые кнопки» — открытый плагин с безопасными и повторяемыми действиями над проектами в 1С:Enterprise
+Development Tools (EDT). Интерфейс локализован на русский и английский языки.
 
-## Installation
+## Установка
 
-1. Open the [latest release](https://github.com/Jimmo910/edt-fast-button/releases/latest).
-2. Download `edt-fast-button-<version>.zip` — not GitHub's automatically generated source archives. Do not unpack it.
-3. In EDT, open **Help > Install New Software**, then choose **Add > Archive** and select the downloaded ZIP.
-4. Select **Fast Button**, complete the wizard, and restart EDT when prompted.
+1. Откройте [последний релиз](https://github.com/Jimmo910/edt-fast-button/releases/latest).
+2. Скачайте `edt-fast-button-<версия>.zip`, а не автоматически созданный GitHub архив исходников. Не распаковывайте
+   файл.
+3. В EDT откройте **Справка > Установить новое ПО**, затем выберите **Добавить > Архив** и укажите скачанный ZIP.
+4. Выберите **Быстрые кнопки**, завершите установку и перезапустите EDT по запросу.
 
-The current release target is EDT 2025.2. A release also contains a SHA-256 checksum. Its build provenance can be
-verified with GitHub CLI:
+Текущая целевая версия — EDT 2025.2. К релизу прикладывается контрольная сумма SHA-256. Происхождение сборки можно
+проверить через GitHub CLI:
 
 ```shell
-gh attestation verify edt-fast-button-<version>.zip -R Jimmo910/edt-fast-button
+gh attestation verify edt-fast-button-<версия>.zip -R Jimmo910/edt-fast-button
 ```
 
-## Switch and update a branch
+## Переключение и обновление ветки
 
-Right-click a Git-connected project and choose **Switch to `<branch>` and update**. Configure the workspace-wide
-target branch (default: `main`) under **Window > Preferences > Fast Button**.
+Нажмите правой кнопкой мыши по Git-проекту и выберите **Переключиться на `<ветка>` и обновить**. Целевая ветка для
+рабочей области (по умолчанию `main`) настраивается в разделе **Окно > Параметры > Быстрые кнопки**.
 
-Before changing anything, the command rejects unsaved editors and tracked, staged, or untracked repository changes.
-It then fetches the configured upstream remote, `origin`, or the only unambiguous remote; creates or checks out the
-target branch; and updates it only by fast-forward. The command is hidden for projects not shared with Git.
+Перед началом команда проверяет несохранённые редакторы, изменённые, staged и untracked-файлы. Затем она получает
+изменения из настроенного upstream, `origin` или единственного однозначного remote, создаёт либо переключает локальную
+ветку и обновляет её только через fast-forward. Для проектов без Git команда не отображается.
 
-The plug-in never performs an automatic merge, rebase, reset, force checkout, commit, or push. Diverged branches and
-repositories with unfinished Git operations are left unchanged for manual resolution.
+Плагин никогда автоматически не выполняет merge, rebase, reset, принудительное переключение, commit или push.
+Разошедшиеся ветки и незавершённые Git-операции остаются без изменений для ручного разрешения.
 
-## Build and test
+## Сборка и тестирование
 
-Use JDK 17 and Maven 3.9.4 or newer:
+Нужны JDK 17 и Maven 3.9.4 или новее:
 
 ```shell
 mvn clean verify
 ```
 
-The quality gate compiles the plug-in, runs JUnit and Checkstyle, checks core JaCoCo line coverage, and creates the p2
-archive under `repositories/ru.jimmo.edt.fastbutton.repository/target/`.
+Команда компилирует плагин, запускает JUnit и Checkstyle, проверяет покрытие JaCoCo и создаёт p2-архив в
+`repositories/ru.jimmo.edt.fastbutton.repository/target/`.
 
-For a disposable EDT installation on Windows, use the guarded p2 deployment script:
-
-```powershell
-.\tools\redeploy-edt.ps1 -EdtHome E:\edt-test -AcknowledgeTestInstallation
-```
-
-## Design and contributing
-
-`application` contains framework-independent use cases and ports. `infrastructure/git` implements non-destructive
-JGit operations, `infrastructure/repository` maps workspace projects to repositories, and `handlers`/`ui` adapt the
-use case to Eclipse jobs and dialogs. Tests use temporary local repositories and require no external services.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [CHANGELOG.md](CHANGELOG.md). The project is
-licensed under the [Eclipse Public License 2.0](LICENSE).
+Архитектура и правила участия описаны в [CONTRIBUTING.md](CONTRIBUTING.md), изменения — в
+[CHANGELOG.md](CHANGELOG.md), порядок сообщения об уязвимостях — в [SECURITY.md](SECURITY.md). Код распространяется
+по лицензии [Eclipse Public License 2.0](LICENSE).
