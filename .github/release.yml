@@ -1,3 +1,5 @@
+# Currently unused: the Release workflow builds notes from CHANGELOG_RU.md via --notes-file instead of
+# --generate-notes, so this auto-notes category configuration is not consulted.
 changelog:
   categories:
     - title: New features
