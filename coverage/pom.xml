@@ -79,6 +79,7 @@
                   <includes>
                     <include>ru.jimmo.edt.fastbutton.ui.application.*</include>
                     <include>ru.jimmo.edt.fastbutton.ui.infrastructure.git.*</include>
+                    <include>ru.jimmo.edt.fastbutton.ui.ui.UpdateMessageResolver</include>
                   </includes>
                   <limits>
                     <limit>

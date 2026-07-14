@@ -4,7 +4,9 @@
 
 package ru.jimmo.edt.fastbutton.ui.ui;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -19,40 +21,64 @@ import org.eclipse.ui.PlatformUI;
 /** Finds unsaved editor buffers before a Git checkout can change their backing files. */
 public final class WorkbenchUnsavedChangesGuard
 {
-    /**
-     * @param repositoryProjects projects that checkout can modify
-     * @return sorted editor titles that must be saved or reverted first
-     */
-    public Set<String> findUnsavedEditors(Collection<IProject> repositoryProjects)
+    /** A dirty editor title with the project owning its input, or {@code null} when unknown. */
+    public record DirtyEditor(String title, IProject project)
     {
-        Set<String> dirtyEditors = new TreeSet<>();
+    }
+
+    /**
+     * Captures every dirty editor of the running workbench. Must be called from the UI thread.
+     *
+     * @return dirty editors with their owning projects when known
+     */
+    public List<DirtyEditor> snapshotDirtyEditors()
+    {
+        List<DirtyEditor> dirtyEditors = new ArrayList<>();
         if (!PlatformUI.isWorkbenchRunning())
         {
             return dirtyEditors;
         }
 
-        Set<IProject> projects = Set.copyOf(repositoryProjects);
         for (IWorkbenchWindow window : PlatformUI.getWorkbench().getWorkbenchWindows())
         {
             for (IWorkbenchPage page : window.getPages())
             {
-                collectDirtyEditors(page, projects, dirtyEditors);
+                collectDirtyEditors(page, dirtyEditors);
             }
         }
         return dirtyEditors;
     }
 
-    private static void collectDirtyEditors(IWorkbenchPage page, Set<IProject> projects,
-        Set<String> dirtyEditors)
+    /**
+     * Filters a dirty-editor snapshot down to editors that a checkout can affect. Editors without
+     * a known owning project are treated as affected.
+     *
+     * @param dirtyEditors captured dirty editors
+     * @param repositoryProjects projects that checkout can modify
+     * @return sorted titles of editors that must be saved or reverted first
+     */
+    public static Set<String> blockingEditorTitles(Collection<DirtyEditor> dirtyEditors,
+        Collection<IProject> repositoryProjects)
+    {
+        Set<IProject> projects = Set.copyOf(repositoryProjects);
+        Set<String> titles = new TreeSet<>();
+        for (DirtyEditor editor : dirtyEditors)
+        {
+            if (editor.project() == null || projects.contains(editor.project()))
+            {
+                titles.add(editor.title());
+            }
+        }
+        return titles;
+    }
+
+    private static void collectDirtyEditors(IWorkbenchPage page, List<DirtyEditor> dirtyEditors)
     {
         for (IEditorPart editor : page.getDirtyEditors())
         {
             IEditorInput input = editor.getEditorInput();
             IResource resource = input != null ? input.getAdapter(IResource.class) : null;
-            if (resource == null || projects.contains(resource.getProject()))
-            {
-                dirtyEditors.add(editor.getTitle());
-            }
+            dirtyEditors.add(new DirtyEditor(editor.getTitle(), resource != null ? resource.getProject() : null));
         }
     }
 }

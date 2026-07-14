@@ -47,6 +47,30 @@ public final class UpdateMessageResolver
         };
     }
 
+    /** Returns a localized warning for a project that is not inside a Git repository. */
+    public String noRepository(String projectName)
+    {
+        return NLS.bind(Messages.NoRepository_Message, projectName);
+    }
+
+    /** Returns a localized warning listing unsaved editors that block the operation. */
+    public String unsavedEditors(Collection<String> editorTitles)
+    {
+        return NLS.bind(Messages.UnsavedEditors_Message, summarize(editorTitles));
+    }
+
+    /** Returns a localized message for a workspace refresh failure after the Git operation. */
+    public String refreshFailure(String failureDetail)
+    {
+        return NLS.bind(Messages.RefreshFailed_Message, detail(failureDetail));
+    }
+
+    /** Returns a localized message for an unexpected repository access failure. */
+    public String unexpectedFailure(String failureDetail)
+    {
+        return NLS.bind(Messages.UnexpectedFailure_Message, detail(failureDetail));
+    }
+
     /** Formats a bounded, localized-independent list for embedding in a message. */
     public String summarize(Collection<String> values)
     {
