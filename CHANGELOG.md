@@ -5,6 +5,8 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-07-14
+
 ### Changed
 
 - Repository discovery and project mapping now run in the background job instead of the UI thread, keeping the
@@ -35,5 +37,6 @@ Semantic Versioning.
 - JUnit integration tests, Checkstyle, JaCoCo coverage gate, CI, CodeQL, SonarQube Cloud integration, and automated
   attested p2 release archives.
 
-[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Jimmo910/edt-fast-button/releases/tag/v0.1.0
