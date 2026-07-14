@@ -23,32 +23,35 @@ jobs:
     timeout-minutes: 30
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      DEPENDABOT_PR: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' }}
+      SKIP_ANALYSIS: >-
+        ${{ github.event_name == 'pull_request'
+          && (github.event.pull_request.user.login == 'dependabot[bot]'
+            || github.event.pull_request.head.repo.fork) }}
     steps:
-      # GitHub withholds Actions secrets from Dependabot pull requests. Keep the
-      # required check explicit and successful; Build and CodeQL still validate
-      # the dependency change, and Sonar analyzes the resulting main branch.
-      - name: Skip analysis for Dependabot pull requests
-        if: env.DEPENDABOT_PR == 'true'
-        run: echo "Sonar analysis is deferred until this dependency update reaches main."
+      # GitHub withholds Actions secrets from Dependabot and fork pull requests. Keep
+      # the required check explicit and successful; Build and CodeQL still validate
+      # the change, and Sonar analyzes the resulting main branch.
+      - name: Skip analysis when Sonar credentials are unavailable
+        if: env.SKIP_ANALYSIS == 'true'
+        run: echo "Sonar analysis is deferred until these changes reach main."
 
       - name: Check out full history
-        if: env.DEPENDABOT_PR != 'true'
-        uses: actions/checkout@v7
+        if: env.SKIP_ANALYSIS != 'true'
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Set up JDK 17
-        if: env.DEPENDABOT_PR != 'true'
-        uses: actions/setup-java@v5
+        if: env.SKIP_ANALYSIS != 'true'
+        uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a # v5.5.0
         with:
           distribution: temurin
           java-version: '17'
           cache: maven
 
       - name: Validate Sonar authentication
-        if: env.DEPENDABOT_PR != 'true'
+        if: env.SKIP_ANALYSIS != 'true'
         shell: bash
         run: |
           if [[ -z "$SONAR_TOKEN" ]]; then
@@ -57,7 +60,7 @@ jobs:
           fi
 
       - name: Build and analyze
-        if: env.DEPENDABOT_PR != 'true'
+        if: env.SKIP_ANALYSIS != 'true'
         run: >-
           mvn -B -ntp
           -Dsonar.qualitygate.wait=true

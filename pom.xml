@@ -27,10 +27,12 @@
     <sonar.coverage.exclusions>
       **/ui/FastButtonPlugin.java,
       **/ui/Messages.java,
-      **/ui/handlers/**,
+      **/ui/handlers/SwitchAndUpdateBranchHandler.java,
       **/ui/preferences/**,
       **/ui/infrastructure/repository/**,
-      **/ui/ui/**
+      **/ui/ui/UserNotifier.java,
+      **/ui/ui/WorkbenchUserNotifier.java,
+      **/ui/ui/WorkbenchUnsavedChangesGuard.java
     </sonar.coverage.exclusions>
   </properties>
 

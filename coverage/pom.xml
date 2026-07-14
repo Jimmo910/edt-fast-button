@@ -79,6 +79,9 @@
                   <includes>
                     <include>ru.jimmo.edt.fastbutton.ui.application.*</include>
                     <include>ru.jimmo.edt.fastbutton.ui.infrastructure.git.*</include>
+                    <include>ru.jimmo.edt.fastbutton.ui.ui.UpdateMessageResolver</include>
+                    <include>ru.jimmo.edt.fastbutton.ui.handlers.SwitchAndUpdateBranchJob</include>
+                    <include>ru.jimmo.edt.fastbutton.ui.handlers.EclipseOperationProgress</include>
                   </includes>
                   <limits>
                     <limit>

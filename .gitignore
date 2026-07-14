@@ -27,6 +27,7 @@ dist/
 
 # Local-only context (infrastructure details, credentials pointers) - NEVER commit
 CLAUDE.md
+RELEASE_LOCAL.md
 .claude/
 .agents/
 .codex/
