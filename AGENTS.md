@@ -16,6 +16,8 @@ Use JDK 17 and Maven 3.9.4+ from the repository root.
 - `mvn verify` — verify while retaining prior build output.
 - `.\tools\redeploy-edt.ps1 -EdtHome E:\edt-test -AcknowledgeTestInstallation` — install into an explicitly
   acknowledged test EDT; the script refuses Program Files installations.
+- Wrapper launchers and scripts can exit 0 even on failure, so gate build success on the literal `BUILD SUCCESS` in
+  the log, not the exit code.
 
 The ZIP is under `repositories/ru.jimmo.edt.fastbutton.repository/target/`. EDT republishes its p2 channel in place;
 if pinned units disappear, refresh `targets/default/default.target` against 2025.2 metadata.
@@ -30,7 +32,15 @@ diverged, or unsupported states instead of resetting user work.
 Write code, comments, and commits in English. Java uses four spaces, Allman braces, a 120-column limit, lowercase
 packages, `PascalCase` types, `camelCase` members, and `UPPER_SNAKE_CASE` constants. Checkstyle and `.editorconfig`
 enforce this. Externalize UI text through Eclipse NLS; keep English/Russian keys and placeholders identical, and use
-`UpdateMessageResolver` for operation messages. Pin GitHub Actions to full commit SHAs.
+`UpdateMessageResolver` for operation messages. Russian `.properties` values must be ASCII `\uXXXX` escapes (Eclipse
+resource loaders read ISO-8859-1); generate the escapes programmatically rather than pasting Cyrillic. Pin GitHub
+Actions to full commit SHAs.
+
+Require-Bundle version ranges must be wide — `[X,X+2)` (for example `[6.8.0,8.0.0)`) or unbounded — never a
+single-major range like `[6.8.0,7.0.0)`, which makes the bundle fail to resolve on the next EDT/EGit major and blocks
+installation. Reuse platform commands (for example EGit's `org.eclipse.egit.ui.team.Branch`) by `commandId` rather
+than reimplementing or redeclaring them, and guard each reused id with a contract test against the target platform;
+never depend on EGit/JGit internal packages.
 
 ## Testing Guidelines
 

@@ -10,6 +10,10 @@ Semantic Versioning.
 - Added a top-level **Switch to another branch...** Git-project action that reuses EGit's branch icon and standard
   dialog for selecting any branch, tag, or ref.
 
+### Changed
+
+- Broadened the JGit and EGit dependency ranges to `[6.8.0,8.0.0)` so the plug-in still installs on the next EDT major.
+
 ## [0.1.2] - 2026-07-14
 
 ### Fixed
