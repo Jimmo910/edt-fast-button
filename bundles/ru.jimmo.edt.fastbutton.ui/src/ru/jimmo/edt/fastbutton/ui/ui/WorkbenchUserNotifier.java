@@ -4,10 +4,12 @@
 
 package ru.jimmo.edt.fastbutton.ui.ui;
 
+import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -42,12 +44,26 @@ public final class WorkbenchUserNotifier implements UserNotifier
             IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
             IWorkbenchPart part = window != null && window.getActivePage() != null
                 ? window.getActivePage().getActivePart() : null;
-            if (part instanceof IViewPart viewPart)
+            IStatusLineManager statusLine = statusLineOf(part);
+            if (statusLine != null)
             {
-                viewPart.getViewSite().getActionBars().getStatusLineManager().setMessage(message);
+                statusLine.setMessage(message);
             }
             FastButtonPlugin.logInfo(message);
         });
+    }
+
+    private static IStatusLineManager statusLineOf(IWorkbenchPart part)
+    {
+        if (part instanceof IViewPart viewPart)
+        {
+            return viewPart.getViewSite().getActionBars().getStatusLineManager();
+        }
+        if (part instanceof IEditorPart editorPart)
+        {
+            return editorPart.getEditorSite().getActionBars().getStatusLineManager();
+        }
+        return null;
     }
 
     private static Shell activeShell()
