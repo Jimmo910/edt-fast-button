@@ -7,7 +7,7 @@
   <parent>
     <groupId>ru.jimmo.edt.fastbutton</groupId>
     <artifactId>bom</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.2-SNAPSHOT</version>
     <relativePath>../bom/pom.xml</relativePath>
   </parent>
 
@@ -20,7 +20,7 @@
     <dependency>
       <groupId>ru.jimmo.edt.fastbutton</groupId>
       <artifactId>ru.jimmo.edt.fastbutton.ui</artifactId>
-      <version>0.1.1-SNAPSHOT</version>
+      <version>0.1.2-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
@@ -41,7 +41,7 @@
                 <artifactItem>
                   <groupId>ru.jimmo.edt.fastbutton</groupId>
                   <artifactId>ru.jimmo.edt.fastbutton.ui</artifactId>
-                  <version>0.1.1-SNAPSHOT</version>
+                  <version>0.1.2-SNAPSHOT</version>
                   <outputDirectory>${project.build.outputDirectory}</outputDirectory>
                   <includes>ru/jimmo/edt/fastbutton/ui/**/*.class</includes>
                 </artifactItem>
