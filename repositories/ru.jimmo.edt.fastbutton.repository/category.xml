@@ -4,5 +4,5 @@
    <feature id="ru.jimmo.edt.fastbutton.feature">
       <category name="ru.jimmo.edt.fastbutton"/>
    </feature>
-   <category-def name="ru.jimmo.edt.fastbutton" label="Fast Button"/>
+   <category-def name="ru.jimmo.edt.fastbutton" label="Быстрые кнопки / Fast Button"/>
 </site>
