@@ -5,8 +5,9 @@
 This is a Maven/Tycho reactor for a 1C:EDT Eclipse plug-in. `targets/default/` pins the EDT 2025.2 platform.
 Production code is in `bundles/ru.jimmo.edt.fastbutton.ui/src/`: `application` contains use cases and ports,
 `infrastructure` contains JGit/Eclipse adapters, and `handlers`, `ui`, and `preferences` contain workbench integration.
-Tests live in `tests/ru.jimmo.edt.fastbutton.ui.tests/src/`. `features/` defines the installable and localized p2
-category features; `repositories/` assembles the update site. `coverage/` generates and enforces JaCoCo results.
+Tests live in `tests/ru.jimmo.edt.fastbutton.ui.tests/src/`. `features/` defines the single installable, localized p2
+feature; `repositories/` assembles the update site and its category definition. `coverage/` generates and enforces
+JaCoCo results.
 Treat every `target/` directory as generated output.
 
 ## Build, Test, and Development Commands

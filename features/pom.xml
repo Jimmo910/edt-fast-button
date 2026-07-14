@@ -16,7 +16,6 @@
   <name>Features</name>
 
   <modules>
-    <module>ru.jimmo.edt.fastbutton.category.feature</module>
     <module>ru.jimmo.edt.fastbutton.feature</module>
   </modules>
 </project>
