@@ -65,8 +65,8 @@ jobs:
         shell: bash
         run: |
           version="${{ steps.version.outputs.version }}"
-          awk -v ver="$version" '
-            $0 ~ ("^## \\[" ver "\\]") { capture=1; next }
+          awk -v tag="## [${version}]" '
+            index($0, tag) == 1 { capture = 1; next }
             capture && /^## \[/ { exit }
             capture { print }
           ' CHANGELOG_RU.md > dist/notes.md
