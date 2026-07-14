@@ -9,6 +9,8 @@ Semantic Versioning.
 
 - Repository discovery and project mapping now run in the background job instead of the UI thread, keeping the
   workbench responsive on large workspaces.
+- The background job orchestration is now covered by headless unit tests through a repository-resolver interface and
+  a use-case factory seam.
 - The success message now also appears in the status line when an editor is active, not only for views.
 - Localized message formatting is centralized in one tested resolver; its coverage is now measured and enforced.
 - SonarQube Cloud analysis is skipped for fork pull requests, whose runs cannot access the Sonar token, so external

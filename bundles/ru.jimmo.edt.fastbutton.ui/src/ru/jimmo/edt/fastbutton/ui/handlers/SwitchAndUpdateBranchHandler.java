@@ -18,7 +18,11 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.menus.UIElement;
 
 import ru.jimmo.edt.fastbutton.ui.Messages;
+import ru.jimmo.edt.fastbutton.ui.application.SwitchAndUpdateBranchUseCase;
+import ru.jimmo.edt.fastbutton.ui.infrastructure.git.JGitBranchNamePolicy;
+import ru.jimmo.edt.fastbutton.ui.infrastructure.git.JGitBranchUpdater;
 import ru.jimmo.edt.fastbutton.ui.infrastructure.repository.GitRepositoryContextResolver;
+import ru.jimmo.edt.fastbutton.ui.infrastructure.repository.WorkspaceGitRepositoryContextResolver;
 import ru.jimmo.edt.fastbutton.ui.preferences.PreferenceConstants;
 import ru.jimmo.edt.fastbutton.ui.ui.UpdateMessageResolver;
 import ru.jimmo.edt.fastbutton.ui.ui.UserNotifier;
@@ -31,7 +35,7 @@ public final class SwitchAndUpdateBranchHandler extends AbstractHandler implemen
 {
     public static final String COMMAND_ID = "ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch"; //$NON-NLS-1$
 
-    private final GitRepositoryContextResolver repositoryResolver = new GitRepositoryContextResolver();
+    private final GitRepositoryContextResolver repositoryResolver = new WorkspaceGitRepositoryContextResolver();
     private final WorkbenchUnsavedChangesGuard unsavedChangesGuard = new WorkbenchUnsavedChangesGuard();
     private final UpdateMessageResolver messages = new UpdateMessageResolver();
     private final UserNotifier notifier = new WorkbenchUserNotifier();
@@ -48,7 +52,9 @@ public final class SwitchAndUpdateBranchHandler extends AbstractHandler implemen
         // Only the workbench snapshot needs the UI thread; repository I/O happens in the job.
         List<DirtyEditor> dirtyEditors = unsavedChangesGuard.snapshotDirtyEditors();
         new SwitchAndUpdateBranchJob(project, dirtyEditors, PreferenceConstants.getTargetBranch(),
-            repositoryResolver, messages, notifier).schedule();
+            repositoryResolver, messages, notifier,
+            context -> new SwitchAndUpdateBranchUseCase(new JGitBranchNamePolicy(),
+                new JGitBranchUpdater(context.getRepository()))).schedule();
         return Boolean.TRUE;
     }
 

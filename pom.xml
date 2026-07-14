@@ -27,7 +27,7 @@
     <sonar.coverage.exclusions>
       **/ui/FastButtonPlugin.java,
       **/ui/Messages.java,
-      **/ui/handlers/**,
+      **/ui/handlers/SwitchAndUpdateBranchHandler.java,
       **/ui/preferences/**,
       **/ui/infrastructure/repository/**,
       **/ui/ui/UserNotifier.java,

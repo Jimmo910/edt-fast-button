@@ -25,8 +25,6 @@ import ru.jimmo.edt.fastbutton.ui.Messages;
 import ru.jimmo.edt.fastbutton.ui.application.BranchUpdateException;
 import ru.jimmo.edt.fastbutton.ui.application.BranchUpdateResult;
 import ru.jimmo.edt.fastbutton.ui.application.SwitchAndUpdateBranchUseCase;
-import ru.jimmo.edt.fastbutton.ui.infrastructure.git.JGitBranchNamePolicy;
-import ru.jimmo.edt.fastbutton.ui.infrastructure.git.JGitBranchUpdater;
 import ru.jimmo.edt.fastbutton.ui.infrastructure.repository.GitRepositoryContext;
 import ru.jimmo.edt.fastbutton.ui.infrastructure.repository.GitRepositoryContextResolver;
 import ru.jimmo.edt.fastbutton.ui.ui.UpdateMessageResolver;
@@ -50,9 +48,11 @@ final class SwitchAndUpdateBranchJob extends Job
     private final GitRepositoryContextResolver repositoryResolver;
     private final UpdateMessageResolver messages;
     private final UserNotifier notifier;
+    private final UseCaseFactory useCaseFactory;
 
     SwitchAndUpdateBranchJob(IProject project, List<DirtyEditor> dirtyEditors, String branch,
-        GitRepositoryContextResolver repositoryResolver, UpdateMessageResolver messages, UserNotifier notifier)
+        GitRepositoryContextResolver repositoryResolver, UpdateMessageResolver messages, UserNotifier notifier,
+        UseCaseFactory useCaseFactory)
     {
         super(NLS.bind(Messages.Job_Name, branch));
         this.project = project;
@@ -61,7 +61,19 @@ final class SwitchAndUpdateBranchJob extends Job
         this.repositoryResolver = repositoryResolver;
         this.messages = messages;
         this.notifier = notifier;
+        this.useCaseFactory = useCaseFactory;
         setUser(true);
+    }
+
+    /** Creates the application use case bound to a resolved repository context. */
+    @FunctionalInterface
+    interface UseCaseFactory
+    {
+        /**
+         * @param context resolved repository context
+         * @return a use case bound to the context's repository
+         */
+        SwitchAndUpdateBranchUseCase create(GitRepositoryContext context);
     }
 
     @Override
@@ -124,8 +136,7 @@ final class SwitchAndUpdateBranchJob extends Job
     {
         try
         {
-            var useCase = new SwitchAndUpdateBranchUseCase(new JGitBranchNamePolicy(),
-                new JGitBranchUpdater(context.getRepository()));
+            SwitchAndUpdateBranchUseCase useCase = useCaseFactory.create(context);
             BranchUpdateResult result = useCase.execute(branch,
                 new EclipseOperationProgress(progress.split(GIT_OPERATION_TICKS)));
             context.refreshProjects(progress.split(REFRESH_TICKS));
