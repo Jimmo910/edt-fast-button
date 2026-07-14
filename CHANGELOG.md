@@ -7,6 +7,13 @@ Semantic Versioning.
 
 ### Changed
 
+- Repository discovery and project mapping now run in the background job instead of the UI thread, keeping the
+  workbench responsive on large workspaces.
+- The success message now also appears in the status line when an editor is active, not only for views.
+- Localized message formatting is centralized in one tested resolver; its coverage is now measured and enforced.
+- SonarQube Cloud analysis is skipped for fork pull requests, whose runs cannot access the Sonar token, so external
+  contributions are no longer blocked by the required check.
+- GitHub Actions steps are pinned to commit SHAs.
 - SonarQube Cloud now requires a real token, waits for the Quality Gate, and classifies the Tycho test bundle as test
   code for accurate issues and coverage.
 - CI check names and Java 17 Dependabot constraints are explicit and suitable for branch protection.

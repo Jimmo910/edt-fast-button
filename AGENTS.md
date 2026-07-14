@@ -20,6 +20,10 @@ Use JDK 17 and Maven 3.9.4 or newer from the repository root.
 
 The distributable ZIP is under `repositories/ru.jimmo.edt.fastbutton.repository/target/`.
 
+The pinned EDT p2 channel (`https://edt.1c.ru/downloads/releases/ruby/2025.2/`) is republished in place on EDT point
+releases. If target resolution suddenly fails with missing installable-unit versions, refresh the pinned versions in
+`targets/default/default.target` against the current channel content instead of debugging the build.
+
 ## Coding Style & Naming Conventions
 
 Write code, comments, and commits in English. Java uses four spaces, Allman braces, and a 120-column limit. Use
