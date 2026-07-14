@@ -10,6 +10,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
@@ -20,24 +21,52 @@ import org.w3c.dom.Document;
 public class PluginContributionTest
 {
     @Test
-    public void contributesGitOnlyActionBeforeNewGroup() throws Exception
+    public void contributesGitOnlyActionsBeforeNewGroup() throws Exception
     {
         Document pluginXml = loadPluginXml();
         var xpath = XPathFactory.newInstance().newXPath();
-        String commandPath = "/plugin/extension[@point='org.eclipse.ui.menus']"
+        String contributionPath = "/plugin/extension[@point='org.eclipse.ui.menus']"
             + "/menuContribution[@locationURI="
-            + "'popup:com._1c.g5.v8.dt.navigator.ui.navigator.popup?before=group.new']"
+            + "'popup:com._1c.g5.v8.dt.navigator.ui.navigator.popup?before=group.new']"; //$NON-NLS-1$
+        String updateCommandPath = contributionPath
             + "/command[@commandId='ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch']"; //$NON-NLS-1$
+        String branchCommandPath = contributionPath
+            + "/command[@commandId='org.eclipse.egit.ui.team.Branch']"; //$NON-NLS-1$
 
-        Double commandCount = (Double)xpath.evaluate(
-            "count(" + commandPath + ")", pluginXml, XPathConstants.NUMBER); //$NON-NLS-1$ //$NON-NLS-2$
-        assertEquals(1.0, commandCount, 0.0);
-        assertEquals(1.0, (Double)xpath.evaluate("count(" + commandPath
-            + "/visibleWhen/and/iterate/and/instanceof[@value='org.eclipse.core.resources.IProject'])", //$NON-NLS-1$
-            pluginXml, XPathConstants.NUMBER), 0.0);
-        assertEquals(1.0, (Double)xpath.evaluate("count(" + commandPath
-            + "/visibleWhen/and/iterate/and/test[@property='GitResource.isShared' and "
-            + "@forcePluginActivation='true'])", pluginXml, XPathConstants.NUMBER), 0.0); //$NON-NLS-1$
+        assertEquals(1, count(xpath, pluginXml, updateCommandPath));
+        assertEquals(1, count(xpath, pluginXml, branchCommandPath + "[@label='%switchBranch.command.label']"));
+        assertEquals(1, count(xpath, pluginXml, branchCommandPath
+            + "/preceding-sibling::command[@commandId='ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch']"));
+        assertUsesSingleGitProjectExpression(xpath, pluginXml, updateCommandPath);
+        assertUsesSingleGitProjectExpression(xpath, pluginXml, branchCommandPath);
+    }
+
+    @Test
+    public void definesSingleGitProjectExpressionOnce() throws Exception
+    {
+        Document pluginXml = loadPluginXml();
+        var xpath = XPathFactory.newInstance().newXPath();
+        String expressionPath = "/plugin/extension[@point='org.eclipse.core.expressions.definitions']"
+            + "/definition[@id='ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject']"; //$NON-NLS-1$
+
+        assertEquals(1, count(xpath, pluginXml, expressionPath));
+        assertEquals(1, count(xpath, pluginXml, expressionPath
+            + "/and[count[@value='1'] and iterate[@ifEmpty='false' and @operator='and']]"));
+        assertEquals(1, count(xpath, pluginXml, expressionPath
+            + "/and/iterate/and/instanceof[@value='org.eclipse.core.resources.IProject']"));
+        assertEquals(1, count(xpath, pluginXml, expressionPath
+            + "/and/iterate/and/test[@property='GitResource.isShared' and @forcePluginActivation='true']"));
+    }
+
+    @Test
+    public void reusesEgitBranchCommandWithoutDeclaringInternalHandler() throws Exception
+    {
+        Document pluginXml = loadPluginXml();
+        var xpath = XPathFactory.newInstance().newXPath();
+        String commandPath = "/plugin/extension[@point='org.eclipse.ui.commands']"
+            + "/command[@id='org.eclipse.egit.ui.team.Branch']"; //$NON-NLS-1$
+
+        assertEquals(0, count(xpath, pluginXml, commandPath));
     }
 
     @Test
@@ -61,5 +90,20 @@ public class PluginContributionTest
             factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true); //$NON-NLS-1$
             return factory.newDocumentBuilder().parse(stream);
         }
+    }
+
+    private static void assertUsesSingleGitProjectExpression(XPath xpath, Document pluginXml, String commandPath)
+        throws Exception
+    {
+        assertEquals(1, count(xpath, pluginXml, commandPath
+            + "/visibleWhen[@checkEnabled='false']/reference"
+            + "[@definitionId='ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject']"));
+    }
+
+    private static int count(XPath xpath, Document document, String expression) throws Exception
+    {
+        Double result = (Double)xpath.evaluate("count(" + expression + ")", document, //$NON-NLS-1$ //$NON-NLS-2$
+            XPathConstants.NUMBER);
+        return result.intValue();
     }
 }

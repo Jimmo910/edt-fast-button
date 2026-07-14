@@ -33,6 +33,10 @@ gh attestation verify edt-fast-button-<version>.zip -R Jimmo910/edt-fast-button
 Right-click a Git-connected project and choose **Switch to `<branch>` and update**. Configure the workspace-wide
 target branch (default: `main`) under **Window > Preferences > Fast Button**.
 
+The adjacent Git-icon **Switch to another branch...** action opens EGit's standard dialog for selecting any local
+branch, remote-tracking branch, tag, or other ref. It performs a regular EGit checkout without automatically fetching
+or updating from a remote.
+
 Before changing anything, the command rejects unsaved editors and tracked, staged, or untracked repository changes.
 It then fetches the configured upstream remote, `origin`, or the only unambiguous remote; creates or checks out the
 target branch; and updates it only by fast-forward. The command is hidden for projects not shared with Git.

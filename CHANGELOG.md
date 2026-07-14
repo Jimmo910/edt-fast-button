@@ -5,6 +5,11 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+### Added
+
+- Added a top-level **Switch to another branch...** Git-project action that reuses EGit's branch icon and standard
+  dialog for selecting any branch, tag, or ref.
+
 ## [0.1.2] - 2026-07-14
 
 ### Fixed
