@@ -5,6 +5,17 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-07-14
+
+### Fixed
+
+- The update site no longer lists the plug-in three times in Install New Software; it offers a single feature under one category.
+
+### Changed
+
+- Documentation is Russian-first: README.md is now Russian and the English version moved to README_EN.md.
+- GitHub release notes are now published in Russian from CHANGELOG_RU.md.
+
 ## [0.1.1] - 2026-07-14
 
 ### Changed
@@ -37,6 +48,7 @@ Semantic Versioning.
 - JUnit integration tests, Checkstyle, JaCoCo coverage gate, CI, CodeQL, SonarQube Cloud integration, and automated
   attested p2 release archives.
 
-[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Jimmo910/edt-fast-button/releases/tag/v0.1.0

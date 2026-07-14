@@ -5,6 +5,17 @@ Versioning.
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-07-14
+
+### Исправлено
+
+- Апдейт-сайт больше не показывает плагин трижды в окне «Установить новое ПО»: теперь предлагается одна фича в одной категории.
+
+### Изменено
+
+- Документация теперь в первую очередь на русском: README.md стал русским, английская версия перенесена в README_EN.md.
+- Заметки к релизам на GitHub публикуются на русском из CHANGELOG_RU.md.
+
 ## [0.1.1] - 2026-07-14
 
 ### Изменено
@@ -39,6 +50,7 @@ Versioning.
 - Интеграционные тесты JUnit, Checkstyle, порог покрытия JaCoCo, CI, CodeQL, интеграция с SonarQube Cloud и
   автоматические аттестованные архивы релизов p2.
 
-[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Jimmo910/edt-fast-button/releases/tag/v0.1.0

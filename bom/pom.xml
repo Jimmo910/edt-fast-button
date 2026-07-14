@@ -6,7 +6,7 @@
 
   <groupId>ru.jimmo.edt.fastbutton</groupId>
   <artifactId>bom</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>BOM</name>
@@ -77,7 +77,7 @@
               <artifact>
                 <groupId>ru.jimmo.edt.fastbutton</groupId>
                 <artifactId>default</artifactId>
-                <version>0.1.1-SNAPSHOT</version>
+                <version>0.1.2-SNAPSHOT</version>
               </artifact>
             </target>
             <dependency-resolution>
