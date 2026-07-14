@@ -5,6 +5,17 @@ Versioning.
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-07-14
+
+### Добавлено
+
+- В верхнюю часть контекстного меню Git-проекта добавлена кнопка «Переключиться на другую ветку...» со штатной
+  Git-иконкой и окном EGit для выбора произвольной ветки, тега или ref.
+
+### Изменено
+
+- Расширены диапазоны зависимостей JGit и EGit до `[6.8.0,8.0.0)`, чтобы плагин устанавливался и на следующей мажорной версии EDT.
+
 ## [0.1.2] - 2026-07-14
 
 ### Исправлено
@@ -50,7 +61,8 @@ Versioning.
 - Интеграционные тесты JUnit, Checkstyle, порог покрытия JaCoCo, CI, CodeQL, интеграция с SonarQube Cloud и
   автоматические аттестованные архивы релизов p2.
 
-[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Jimmo910/edt-fast-button/releases/tag/v0.1.0

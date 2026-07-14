@@ -5,6 +5,17 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-07-14
+
+### Added
+
+- Added a top-level **Switch to another branch...** Git-project action that reuses EGit's branch icon and standard
+  dialog for selecting any branch, tag, or ref.
+
+### Changed
+
+- Broadened the JGit and EGit dependency ranges to `[6.8.0,8.0.0)` so the plug-in still installs on the next EDT major.
+
 ## [0.1.2] - 2026-07-14
 
 ### Fixed
@@ -48,7 +59,8 @@ Semantic Versioning.
 - JUnit integration tests, Checkstyle, JaCoCo coverage gate, CI, CodeQL, SonarQube Cloud integration, and automated
   attested p2 release archives.
 
-[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Jimmo910/edt-fast-button/releases/tag/v0.1.0

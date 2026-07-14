@@ -16,6 +16,23 @@
       </page>
    </extension>
 
+   <extension point="org.eclipse.core.expressions.definitions">
+      <definition id="ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject">
+         <and>
+            <count value="1"/>
+            <iterate ifEmpty="false" operator="and">
+               <and>
+                  <instanceof value="org.eclipse.core.resources.IProject"/>
+                  <test
+                        forcePluginActivation="true"
+                        property="GitResource.isShared">
+                  </test>
+               </and>
+            </iterate>
+         </and>
+      </definition>
+   </extension>
+
    <extension point="org.eclipse.ui.commands">
       <command
             defaultHandler="ru.jimmo.edt.fastbutton.ui.handlers.SwitchAndUpdateBranchHandler"
@@ -32,18 +49,15 @@
                commandId="ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch"
                style="push">
             <visibleWhen checkEnabled="false">
-               <and>
-                  <count value="1"/>
-                  <iterate ifEmpty="false" operator="and">
-                     <and>
-                        <instanceof value="org.eclipse.core.resources.IProject"/>
-                        <test
-                              forcePluginActivation="true"
-                              property="GitResource.isShared">
-                        </test>
-                     </and>
-                  </iterate>
-               </and>
+               <reference definitionId="ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject"/>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.eclipse.egit.ui.team.Branch"
+               label="%switchBranch.command.label"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference definitionId="ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject"/>
             </visibleWhen>
          </command>
       </menuContribution>
