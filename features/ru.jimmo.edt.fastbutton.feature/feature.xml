@@ -3,7 +3,7 @@
 <feature
       id="ru.jimmo.edt.fastbutton.feature"
       label="%featureName"
-      version="0.1.0.qualifier"
+      version="0.1.1.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -18,7 +18,7 @@
          id="ru.jimmo.edt.fastbutton.ui"
          download-size="0"
          install-size="0"
-         version="0.1.0.qualifier"
+         version="0.1.1.qualifier"
          unpack="false"/>
 
 </feature>
