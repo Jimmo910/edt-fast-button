@@ -144,7 +144,8 @@ final class SwitchAndUpdateBranchJob extends Job
             // Once the git operation above has changed the worktree, the refresh must complete
             // even if cancellation arrives in this window, so it stays consistent with a success
             // notification; a cancellable split here could skip both and leave the resource tree stale.
-            context.refreshProjects(progress.split(REFRESH_TICKS, SubMonitor.SUPPRESS_ISCANCELED));
+            context.refreshProjects(
+                progress.split(REFRESH_TICKS, SubMonitor.SUPPRESS_BEGINTASK | SubMonitor.SUPPRESS_ISCANCELED));
             notifier.success(result);
             return Status.OK_STATUS;
         }
