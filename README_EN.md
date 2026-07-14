@@ -5,6 +5,9 @@
 [![Build](https://github.com/Jimmo910/edt-fast-button/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Jimmo910/edt-fast-button/actions/workflows/build.yml)
 [![CodeQL](https://github.com/Jimmo910/edt-fast-button/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Jimmo910/edt-fast-button/security/code-scanning)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=Jimmo910_edt-fast-button&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Jimmo910_edt-fast-button)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Jimmo910_edt-fast-button&metric=bugs)](https://sonarcloud.io/summary/overall?id=Jimmo910_edt-fast-button)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Jimmo910_edt-fast-button&metric=vulnerabilities)](https://sonarcloud.io/summary/overall?id=Jimmo910_edt-fast-button)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Jimmo910_edt-fast-button&metric=code_smells)](https://sonarcloud.io/summary/overall?id=Jimmo910_edt-fast-button)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Jimmo910_edt-fast-button&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Jimmo910_edt-fast-button)
 [![Release](https://img.shields.io/github/v/release/Jimmo910/edt-fast-button?sort=semver)](https://github.com/Jimmo910/edt-fast-button/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Jimmo910/edt-fast-button/total)](https://github.com/Jimmo910/edt-fast-button/releases)
@@ -13,6 +16,25 @@
 
 Fast Button is an open-source plug-in that adds safe, repeatable project actions to 1C:Enterprise Development Tools
 (EDT). Its UI is available in English and Russian.
+
+## Features
+
+The plug-in adds actions to the Git-project context menu in the EDT navigator. Each action appears only for
+Git-connected projects and follows the EDT UI language (Russian or English).
+
+- **Switch to the configured branch and update**
+  - *What it does:* safely switches the project to a preconfigured branch and fast-forwards it from the remote in one
+    click.
+  - *How it works:* first rejects unsaved editors and any uncommitted changes (modified, staged, untracked); then
+    fetches the configured upstream, `origin`, or the only unambiguous remote; creates or checks out the local branch;
+    and updates it by fast-forward only. It never merges, rebases, resets, force-checks-out, commits, or pushes —
+    diverged branches and unfinished Git operations are left for manual resolution.
+  - *Configuration:* the target branch (default `main`) under **Window > Preferences > Fast Button**.
+- **Switch to another branch…**
+  - *What it does:* quickly checks out any local or remote-tracking branch, tag, or other ref.
+  - *How it works:* opens EGit's standard branch-selection dialog (with the standard Git icon) and performs a regular
+    checkout — without any automatic fetch or update from a remote.
+  - *Configuration:* none.
 
 ## Installation
 
@@ -27,22 +49,6 @@ verified with GitHub CLI:
 ```shell
 gh attestation verify edt-fast-button-<version>.zip -R Jimmo910/edt-fast-button
 ```
-
-## Switch and update a branch
-
-Right-click a Git-connected project and choose **Switch to `<branch>` and update**. Configure the workspace-wide
-target branch (default: `main`) under **Window > Preferences > Fast Button**.
-
-The adjacent Git-icon **Switch to another branch...** action opens EGit's standard dialog for selecting any local
-branch, remote-tracking branch, tag, or other ref. It performs a regular EGit checkout without automatically fetching
-or updating from a remote.
-
-Before changing anything, the command rejects unsaved editors and tracked, staged, or untracked repository changes.
-It then fetches the configured upstream remote, `origin`, or the only unambiguous remote; creates or checks out the
-target branch; and updates it only by fast-forward. The command is hidden for projects not shared with Git.
-
-The plug-in never performs an automatic merge, rebase, reset, force checkout, commit, or push. Diverged branches and
-repositories with unfinished Git operations are left unchanged for manual resolution.
 
 ## Build and test
 
