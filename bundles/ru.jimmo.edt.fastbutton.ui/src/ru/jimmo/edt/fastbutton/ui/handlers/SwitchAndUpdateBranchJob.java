@@ -106,6 +106,7 @@ final class SwitchAndUpdateBranchJob extends Job
         }
     }
 
+    /** Acquires the repository-wide scheduling rule, then delegates to {@link #runLocked}. */
     private IStatus runWithContext(GitRepositoryContext context, SubMonitor progress)
     {
         Set<String> unsavedEditors = WorkbenchUnsavedChangesGuard.blockingEditorTitles(dirtyEditors,
@@ -132,6 +133,7 @@ final class SwitchAndUpdateBranchJob extends Job
         }
     }
 
+    /** Runs the branch update while the repository-wide scheduling rule is held. */
     private IStatus runLocked(GitRepositoryContext context, SubMonitor progress)
     {
         try
@@ -139,7 +141,10 @@ final class SwitchAndUpdateBranchJob extends Job
             SwitchAndUpdateBranchUseCase useCase = useCaseFactory.create(context);
             BranchUpdateResult result = useCase.execute(branch,
                 new EclipseOperationProgress(progress.split(GIT_OPERATION_TICKS)));
-            context.refreshProjects(progress.split(REFRESH_TICKS));
+            // Once the git operation above has changed the worktree, the refresh must complete
+            // even if cancellation arrives in this window, so it stays consistent with a success
+            // notification; a cancellable split here could skip both and leave the resource tree stale.
+            context.refreshProjects(progress.split(REFRESH_TICKS, SubMonitor.SUPPRESS_ISCANCELED));
             notifier.success(result);
             return Status.OK_STATUS;
         }

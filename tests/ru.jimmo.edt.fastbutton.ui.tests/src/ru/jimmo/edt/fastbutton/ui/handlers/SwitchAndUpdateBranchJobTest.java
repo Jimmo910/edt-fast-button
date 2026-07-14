@@ -191,6 +191,34 @@ public class SwitchAndUpdateBranchJobTest
         assertTrue(notifier.successes.isEmpty());
     }
 
+    @Test
+    public void refreshesAndNotifiesWhenCancelledAfterGitOperation() throws Exception
+    {
+        AtomicBoolean invoked = new AtomicBoolean();
+        BranchUpdateResult expected = sampleResult();
+        GitRepositoryContext context = newContext(List.of(project));
+        GitRepositoryContextResolver resolver = selectedProject -> Optional.of(context);
+        // The job reference is only available once constructed, so the use-case lambda closes over
+        // this holder and cancels the job from inside the git operation it is simulating.
+        SwitchAndUpdateBranchJob[] jobHolder = new SwitchAndUpdateBranchJob[1];
+        SwitchAndUpdateBranchUseCase useCase = new SwitchAndUpdateBranchUseCase(branch -> true,
+            (targetBranch, progress) ->
+            {
+                jobHolder[0].cancel();
+                return expected;
+            });
+
+        SwitchAndUpdateBranchJob job = new SwitchAndUpdateBranchJob(project, List.of(), BRANCH, resolver, messages,
+            notifier, factory(useCase, invoked));
+        jobHolder[0] = job;
+        job.schedule();
+        job.join();
+
+        assertTrue(job.getResult().isOK());
+        assertEquals(List.of(expected), notifier.successes);
+        assertTrue(notifier.warnings.isEmpty());
+    }
+
     private IStatus run(GitRepositoryContextResolver resolver, List<DirtyEditor> dirtyEditors,
         SwitchAndUpdateBranchJob.UseCaseFactory factory) throws InterruptedException
     {
