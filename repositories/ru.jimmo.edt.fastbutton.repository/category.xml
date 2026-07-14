@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SPDX-License-Identifier: EPL-2.0 -->
 <site>
-   <feature id="ru.jimmo.edt.fastbutton.category.feature"/>
-   <feature id="ru.jimmo.edt.fastbutton.feature"/>
+   <feature id="ru.jimmo.edt.fastbutton.feature">
+      <category name="ru.jimmo.edt.fastbutton"/>
+   </feature>
+   <category-def name="ru.jimmo.edt.fastbutton" label="Быстрые кнопки / Fast Button"/>
 </site>

@@ -61,6 +61,20 @@ jobs:
           cp repositories/ru.jimmo.edt.fastbutton.repository/target/ru.jimmo.edt.fastbutton.repository.zip "dist/$archive"
           (cd dist && sha256sum "$archive" > "$archive.sha256")
 
+      - name: Prepare Russian release notes
+        shell: bash
+        run: |
+          version="${{ steps.version.outputs.version }}"
+          awk -v tag="## [${version}]" '
+            index($0, tag) == 1 { capture = 1; next }
+            capture && /^## \[/ { exit }
+            capture { print }
+          ' CHANGELOG_RU.md > dist/notes.md
+          if [[ ! -s dist/notes.md ]]; then
+            echo "::error::No CHANGELOG_RU.md section for ${version}." >&2
+            exit 1
+          fi
+
       - name: Attest release archive
         uses: actions/attest@a1948c3f048ba23858d222213b7c278aabede763 # v4.1.1
         with:
@@ -74,5 +88,5 @@ jobs:
           dist/edt-fast-button-${{ steps.version.outputs.version }}.zip
           dist/edt-fast-button-${{ steps.version.outputs.version }}.zip.sha256
           --verify-tag
-          --generate-notes
-          --title "Fast Button ${{ steps.version.outputs.version }}"
+          --notes-file dist/notes.md
+          --title "Быстрые кнопки ${{ steps.version.outputs.version }}"
