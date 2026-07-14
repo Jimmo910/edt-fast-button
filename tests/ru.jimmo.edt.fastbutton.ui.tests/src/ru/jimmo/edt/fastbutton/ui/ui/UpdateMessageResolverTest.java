@@ -9,7 +9,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.eclipse.osgi.util.NLS;
@@ -97,7 +96,7 @@ public class UpdateMessageResolverTest
     public void summarizesLongListsWithRemainderSuffix()
     {
         List<String> values = IntStream.rangeClosed(1, 12)
-            .mapToObj(index -> "item" + index).collect(Collectors.toList()); //$NON-NLS-1$
+            .mapToObj(index -> "item" + index).toList(); //$NON-NLS-1$
         String listed = String.join(", ", values.subList(0, 10)); //$NON-NLS-1$
 
         assertEquals(NLS.bind(Messages.MoreItems_Suffix, listed, 2), resolver.summarize(values));
