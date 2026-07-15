@@ -12,7 +12,7 @@
 [![Релиз](https://img.shields.io/github/v/release/Jimmo910/edt-fast-button?sort=semver)](https://github.com/Jimmo910/edt-fast-button/releases/latest)
 [![Загрузки](https://img.shields.io/github/downloads/Jimmo910/edt-fast-button/total)](https://github.com/Jimmo910/edt-fast-button/releases)
 [![Лицензия: EPL-2.0](https://img.shields.io/badge/license-EPL--2.0-blue.svg)](LICENSE)
-[![EDT 2025.2](https://img.shields.io/badge/1C%3AEDT-2025.2-orange.svg)](https://edt.1c.ru/)
+[![EDT 2026.1](https://img.shields.io/badge/1C%3AEDT-2026.1-orange.svg)](https://edt.1c.ru/)
 
 «Быстрые кнопки» — открытый плагин с безопасными и повторяемыми действиями над проектами в 1С:Enterprise
 Development Tools (EDT). Интерфейс локализован на русский и английский языки.
@@ -51,7 +51,7 @@ Development Tools (EDT). Интерфейс локализован на русс
 3. В EDT откройте **Справка > Установить новое ПО**, затем выберите **Добавить > Архив** и укажите скачанный ZIP.
 4. Выберите **Быстрые кнопки**, завершите установку и перезапустите EDT по запросу.
 
-Текущая целевая версия — EDT 2025.2. К релизу прикладывается контрольная сумма SHA-256. Происхождение сборки можно
+Текущая целевая версия — EDT 2026.1. К релизу прикладывается контрольная сумма SHA-256. Происхождение сборки можно
 проверить через GitHub CLI:
 
 ```shell

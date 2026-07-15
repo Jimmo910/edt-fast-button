@@ -5,6 +5,10 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+### Changed
+
+- Retargeted the build to the EDT 2026.1 platform. The plug-in still targets Java 17 and its dependency ranges already cover EGit/JGit 6.8.12.
+
 ## [0.1.4] - 2026-07-15
 
 ### Added

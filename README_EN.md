@@ -12,7 +12,7 @@
 [![Release](https://img.shields.io/github/v/release/Jimmo910/edt-fast-button?sort=semver)](https://github.com/Jimmo910/edt-fast-button/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Jimmo910/edt-fast-button/total)](https://github.com/Jimmo910/edt-fast-button/releases)
 [![License: EPL-2.0](https://img.shields.io/badge/license-EPL--2.0-blue.svg)](LICENSE)
-[![EDT 2025.2](https://img.shields.io/badge/1C%3AEDT-2025.2-orange.svg)](https://edt.1c.ru/)
+[![EDT 2026.1](https://img.shields.io/badge/1C%3AEDT-2026.1-orange.svg)](https://edt.1c.ru/)
 
 Fast Button is an open-source plug-in that adds safe, repeatable project actions to 1C:Enterprise Development Tools
 (EDT). Its UI is available in English and Russian.
@@ -49,7 +49,7 @@ Git-connected projects and follows the EDT UI language (Russian or English). Any
 3. In EDT, open **Help > Install New Software**, then choose **Add > Archive** and select the downloaded ZIP.
 4. Select **Fast Button**, complete the wizard, and restart EDT when prompted.
 
-The current release target is EDT 2025.2. A release also contains a SHA-256 checksum. Its build provenance can be
+The current release target is EDT 2026.1. A release also contains a SHA-256 checksum. Its build provenance can be
 verified with GitHub CLI:
 
 ```shell

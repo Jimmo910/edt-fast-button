@@ -6,7 +6,7 @@ updates:
       interval: monthly
     open-pull-requests-limit: 5
     ignore:
-      # EDT 2025.2 and this build intentionally target Java 17.
+      # EDT 2026.1 and this build intentionally target Java 17.
       - dependency-name: "org.eclipse.tycho:*"
         update-types:
           - "version-update:semver-major"
