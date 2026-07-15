@@ -17,6 +17,8 @@ import javax.xml.xpath.XPathFactory;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
+import ru.jimmo.edt.fastbutton.ui.preferences.PreferenceConstants;
+
 /** Guards the exact EDT navigator and workspace preference contributions. */
 public class PluginContributionTest
 {
@@ -42,9 +44,9 @@ public class PluginContributionTest
             + "/preceding-sibling::command[@commandId='ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch']"));
         assertEquals(1, count(xpath, pluginXml, mergeCommandPath
             + "/preceding-sibling::command[@commandId='org.eclipse.egit.ui.team.Branch']"));
-        assertVisibility(xpath, pluginXml, updateCommandPath, "showSwitchAndUpdateButton");
-        assertVisibility(xpath, pluginXml, branchCommandPath, "showSwitchBranchButton");
-        assertVisibility(xpath, pluginXml, mergeCommandPath, "showMergeButton");
+        assertVisibility(xpath, pluginXml, updateCommandPath, PreferenceConstants.SHOW_SWITCH_AND_UPDATE_BUTTON);
+        assertVisibility(xpath, pluginXml, branchCommandPath, PreferenceConstants.SHOW_SWITCH_BRANCH_BUTTON);
+        assertVisibility(xpath, pluginXml, mergeCommandPath, PreferenceConstants.SHOW_MERGE_BUTTON);
     }
 
     @Test

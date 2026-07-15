@@ -33,7 +33,7 @@
       **/ui/ui/UserNotifier.java,
       **/ui/ui/WorkbenchUserNotifier.java,
       **/ui/ui/WorkbenchUnsavedChangesGuard.java,
-      **/ui/expressions/**,
+      **/ui/expressions/**
     </sonar.coverage.exclusions>
   </properties>
 
