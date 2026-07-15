@@ -33,6 +33,16 @@
       </definition>
    </extension>
 
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="ru.jimmo.edt.fastbutton.ui.expressions.CommandVisibilityTester"
+            id="ru.jimmo.edt.fastbutton.ui.expressions.commandVisibilityTester"
+            namespace="ru.jimmo.edt.fastbutton.ui"
+            properties="commandEnabled"
+            type="java.lang.Object">
+      </propertyTester>
+   </extension>
+
    <extension point="org.eclipse.ui.commands">
       <command
             defaultHandler="ru.jimmo.edt.fastbutton.ui.handlers.SwitchAndUpdateBranchHandler"
@@ -49,7 +59,14 @@
                commandId="ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch"
                style="push">
             <visibleWhen checkEnabled="false">
-               <reference definitionId="ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject"/>
+               <and>
+                  <reference definitionId="ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject"/>
+                  <test
+                        forcePluginActivation="true"
+                        property="ru.jimmo.edt.fastbutton.ui.commandEnabled"
+                        value="showSwitchAndUpdateButton">
+                  </test>
+               </and>
             </visibleWhen>
          </command>
          <command
@@ -57,7 +74,29 @@
                label="%switchBranch.command.label"
                style="push">
             <visibleWhen checkEnabled="false">
-               <reference definitionId="ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject"/>
+               <and>
+                  <reference definitionId="ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject"/>
+                  <test
+                        forcePluginActivation="true"
+                        property="ru.jimmo.edt.fastbutton.ui.commandEnabled"
+                        value="showSwitchBranchButton">
+                  </test>
+               </and>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.eclipse.egit.ui.team.Merge"
+               label="%merge.command.label"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <and>
+                  <reference definitionId="ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject"/>
+                  <test
+                        forcePluginActivation="true"
+                        property="ru.jimmo.edt.fastbutton.ui.commandEnabled"
+                        value="showMergeButton">
+                  </test>
+               </and>
             </visibleWhen>
          </command>
       </menuContribution>
