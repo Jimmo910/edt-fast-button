@@ -20,7 +20,8 @@ Fast Button is an open-source plug-in that adds safe, repeatable project actions
 ## Features
 
 The plug-in adds actions to the Git-project context menu in the EDT navigator. Each action appears only for
-Git-connected projects and follows the EDT UI language (Russian or English).
+Git-connected projects and follows the EDT UI language (Russian or English). Any button can be hidden or shown under
+**Window > Preferences > Fast Button** (all are shown by default).
 
 - **Switch to the configured branch and update**
   - *What it does:* safely switches the project to a preconfigured branch and fast-forwards it from the remote in one
@@ -34,6 +35,11 @@ Git-connected projects and follows the EDT UI language (Russian or English).
   - *What it does:* quickly checks out any local or remote-tracking branch, tag, or other ref.
   - *How it works:* opens EGit's standard branch-selection dialog (with the standard Git icon) and performs a regular
     checkout — without any automatic fetch or update from a remote.
+  - *Configuration:* none.
+- **Merge...**
+  - *What it does:* merges a selected branch, tag, or ref into the current branch through EGit's standard machinery.
+  - *How it works:* opens EGit's standard merge dialog (with the standard Git icon) and performs a regular merge
+    (which may create a merge commit or report conflicts — that is EGit's own behaviour).
   - *Configuration:* none.
 
 ## Installation

@@ -5,6 +5,12 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+### Added
+
+- A **Merge...** Git-project action that reuses EGit's standard merge dialog and icon.
+- Per-button visibility toggles under **Window > Preferences > Fast Button** — every action can be shown or hidden
+  (all shown by default).
+
 ## [0.1.3] - 2026-07-14
 
 ### Added
