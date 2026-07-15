@@ -5,6 +5,8 @@ Versioning.
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-07-15
+
 ### Изменено
 
 - Сборка переведена на платформу EDT 2026.1. Плагин по-прежнему рассчитан на Java 17, а диапазоны зависимостей уже покрывают EGit/JGit 6.8.12.
@@ -73,7 +75,8 @@ Versioning.
 - Интеграционные тесты JUnit, Checkstyle, порог покрытия JaCoCo, CI, CodeQL, интеграция с SonarQube Cloud и
   автоматические аттестованные архивы релизов p2.
 
-[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...v0.1.2

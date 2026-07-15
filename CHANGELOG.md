@@ -5,6 +5,8 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-07-15
+
 ### Changed
 
 - Retargeted the build to the EDT 2026.1 platform. The plug-in still targets Java 17 and its dependency ranges already cover EGit/JGit 6.8.12.
@@ -71,7 +73,8 @@ Semantic Versioning.
 - JUnit integration tests, Checkstyle, JaCoCo coverage gate, CI, CodeQL, SonarQube Cloud integration, and automated
   attested p2 release archives.
 
-[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...v0.1.2
