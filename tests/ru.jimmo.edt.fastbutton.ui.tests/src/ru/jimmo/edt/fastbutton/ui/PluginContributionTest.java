@@ -17,6 +17,8 @@ import javax.xml.xpath.XPathFactory;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
+import ru.jimmo.edt.fastbutton.ui.preferences.PreferenceConstants;
+
 /** Guards the exact EDT navigator and workspace preference contributions. */
 public class PluginContributionTest
 {
@@ -32,13 +34,19 @@ public class PluginContributionTest
             + "/command[@commandId='ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch']"; //$NON-NLS-1$
         String branchCommandPath = contributionPath
             + "/command[@commandId='org.eclipse.egit.ui.team.Branch']"; //$NON-NLS-1$
+        String mergeCommandPath = contributionPath
+            + "/command[@commandId='org.eclipse.egit.ui.team.Merge']"; //$NON-NLS-1$
 
         assertEquals(1, count(xpath, pluginXml, updateCommandPath));
         assertEquals(1, count(xpath, pluginXml, branchCommandPath + "[@label='%switchBranch.command.label']"));
+        assertEquals(1, count(xpath, pluginXml, mergeCommandPath + "[@label='%merge.command.label']"));
         assertEquals(1, count(xpath, pluginXml, branchCommandPath
             + "/preceding-sibling::command[@commandId='ru.jimmo.edt.fastbutton.ui.commands.switchAndUpdateBranch']"));
-        assertUsesSingleGitProjectExpression(xpath, pluginXml, updateCommandPath);
-        assertUsesSingleGitProjectExpression(xpath, pluginXml, branchCommandPath);
+        assertEquals(1, count(xpath, pluginXml, mergeCommandPath
+            + "/preceding-sibling::command[@commandId='org.eclipse.egit.ui.team.Branch']"));
+        assertVisibility(xpath, pluginXml, updateCommandPath, PreferenceConstants.SHOW_SWITCH_AND_UPDATE_BUTTON);
+        assertVisibility(xpath, pluginXml, branchCommandPath, PreferenceConstants.SHOW_SWITCH_BRANCH_BUTTON);
+        assertVisibility(xpath, pluginXml, mergeCommandPath, PreferenceConstants.SHOW_MERGE_BUTTON);
     }
 
     @Test
@@ -59,14 +67,27 @@ public class PluginContributionTest
     }
 
     @Test
-    public void reusesEgitBranchCommandWithoutDeclaringInternalHandler() throws Exception
+    public void reusesEgitCommandsWithoutDeclaringInternalHandlers() throws Exception
     {
         Document pluginXml = loadPluginXml();
         var xpath = XPathFactory.newInstance().newXPath();
-        String commandPath = "/plugin/extension[@point='org.eclipse.ui.commands']"
-            + "/command[@id='org.eclipse.egit.ui.team.Branch']"; //$NON-NLS-1$
+        String commandsPath = "/plugin/extension[@point='org.eclipse.ui.commands']/command"; //$NON-NLS-1$
 
-        assertEquals(0, count(xpath, pluginXml, commandPath));
+        assertEquals(0, count(xpath, pluginXml, commandsPath + "[@id='org.eclipse.egit.ui.team.Branch']"));
+        assertEquals(0, count(xpath, pluginXml, commandsPath + "[@id='org.eclipse.egit.ui.team.Merge']"));
+    }
+
+    @Test
+    public void registersTheVisibilityPropertyTester() throws Exception
+    {
+        Document pluginXml = loadPluginXml();
+        var xpath = XPathFactory.newInstance().newXPath();
+        String testerPath = "/plugin/extension[@point='org.eclipse.core.expressions.propertyTesters']"
+            + "/propertyTester[@namespace='ru.jimmo.edt.fastbutton.ui'"
+            + " and @properties='commandEnabled'"
+            + " and @class='ru.jimmo.edt.fastbutton.ui.expressions.CommandVisibilityTester']"; //$NON-NLS-1$
+
+        assertEquals(1, count(xpath, pluginXml, testerPath));
     }
 
     @Test
@@ -92,12 +113,14 @@ public class PluginContributionTest
         }
     }
 
-    private static void assertUsesSingleGitProjectExpression(XPath xpath, Document pluginXml, String commandPath)
+    private static void assertVisibility(XPath xpath, Document pluginXml, String commandPath, String preferenceKey)
         throws Exception
     {
-        assertEquals(1, count(xpath, pluginXml, commandPath
-            + "/visibleWhen[@checkEnabled='false']/reference"
-            + "[@definitionId='ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject']"));
+        String andPath = commandPath + "/visibleWhen[@checkEnabled='false']/and"; //$NON-NLS-1$
+        assertEquals(1, count(xpath, pluginXml, andPath
+            + "/reference[@definitionId='ru.jimmo.edt.fastbutton.ui.expressions.singleGitProject']"));
+        assertEquals(1, count(xpath, pluginXml, andPath
+            + "/test[@property='ru.jimmo.edt.fastbutton.ui.commandEnabled' and @value='" + preferenceKey + "']"));
     }
 
     private static int count(XPath xpath, Document document, String expression) throws Exception

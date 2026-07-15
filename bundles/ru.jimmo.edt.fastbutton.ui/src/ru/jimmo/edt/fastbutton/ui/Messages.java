@@ -14,6 +14,9 @@ public final class Messages extends NLS
     public static String PreferencePage_Description;
     public static String PreferencePage_TargetBranch;
     public static String PreferencePage_InvalidBranch;
+    public static String PreferencePage_ShowSwitchAndUpdate;
+    public static String PreferencePage_ShowSwitchBranch;
+    public static String PreferencePage_ShowMerge;
     public static String SwitchAndUpdate_Label;
     public static String Job_Name;
     public static String Dialog_Title;

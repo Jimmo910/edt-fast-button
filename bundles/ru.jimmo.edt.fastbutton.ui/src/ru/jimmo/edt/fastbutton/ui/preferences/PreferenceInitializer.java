@@ -14,7 +14,10 @@ public final class PreferenceInitializer extends AbstractPreferenceInitializer
     @Override
     public void initializeDefaultPreferences()
     {
-        FastButtonPlugin.getDefault().getPreferenceStore().setDefault(PreferenceConstants.TARGET_BRANCH,
-            PreferenceConstants.DEFAULT_TARGET_BRANCH);
+        var store = FastButtonPlugin.getDefault().getPreferenceStore();
+        store.setDefault(PreferenceConstants.TARGET_BRANCH, PreferenceConstants.DEFAULT_TARGET_BRANCH);
+        store.setDefault(PreferenceConstants.SHOW_SWITCH_AND_UPDATE_BUTTON, true);
+        store.setDefault(PreferenceConstants.SHOW_SWITCH_BRANCH_BUTTON, true);
+        store.setDefault(PreferenceConstants.SHOW_MERGE_BUTTON, true);
     }
 }

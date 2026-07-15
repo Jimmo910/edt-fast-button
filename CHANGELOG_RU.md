@@ -5,6 +5,14 @@ Versioning.
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-07-15
+
+### Добавлено
+
+- Кнопка **«Слить…»** для Git-проекта, использующая штатное окно слияния и иконку EGit.
+- Переключатели видимости для каждой кнопки в разделе **Окно > Параметры > Быстрые кнопки** — любое действие можно
+  показать или скрыть (по умолчанию показаны все).
+
 ## [0.1.3] - 2026-07-14
 
 ### Добавлено
@@ -61,7 +69,8 @@ Versioning.
 - Интеграционные тесты JUnit, Checkstyle, порог покрытия JaCoCo, CI, CodeQL, интеграция с SonarQube Cloud и
   автоматические аттестованные архивы релизов p2.
 
-[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.0...v0.1.1

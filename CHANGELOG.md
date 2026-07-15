@@ -5,6 +5,14 @@ Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-07-15
+
+### Added
+
+- A **Merge...** Git-project action that reuses EGit's standard merge dialog and icon.
+- Per-button visibility toggles under **Window > Preferences > Fast Button** — every action can be shown or hidden
+  (all shown by default).
+
 ## [0.1.3] - 2026-07-14
 
 ### Added
@@ -59,7 +67,8 @@ Semantic Versioning.
 - JUnit integration tests, Checkstyle, JaCoCo coverage gate, CI, CodeQL, SonarQube Cloud integration, and automated
   attested p2 release archives.
 
-[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Jimmo910/edt-fast-button/compare/v0.1.0...v0.1.1
