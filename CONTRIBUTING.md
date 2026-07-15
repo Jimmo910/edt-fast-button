@@ -11,7 +11,7 @@ Use JDK 17 and Maven 3.9.4 or newer. Run the complete quality gate from the repo
 mvn clean verify
 ```
 
-The build downloads the pinned EDT 2025.2 target platform. Tests must use temporary local Git repositories and must
+The build downloads the EDT 2026.1 target platform. Tests must use temporary local Git repositories and must
 not depend on credentials or external services.
 
 ## Code expectations

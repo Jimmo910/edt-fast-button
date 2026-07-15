@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This Maven/Tycho reactor builds a 1C:EDT Eclipse plug-in against `targets/default/` (EDT 2025.2). Production code is
+This Maven/Tycho reactor builds a 1C:EDT Eclipse plug-in against `targets/default/` (EDT 2026.1). Production code is
 under `bundles/ru.jimmo.edt.fastbutton.ui/src/`: `application` defines use cases and ports,
 `infrastructure` contains JGit/Eclipse adapters, and `handlers`, `ui`, and `preferences` integrate with the workbench.
 Tests are under `tests/`; `features/` contains the single installable feature, `repositories/` assembles its p2 site,
@@ -20,7 +20,7 @@ Use JDK 17 and Maven 3.9.4+ from the repository root.
   the log, not the exit code.
 
 The ZIP is under `repositories/ru.jimmo.edt.fastbutton.repository/target/`. EDT republishes its p2 channel in place;
-if pinned units disappear, refresh `targets/default/default.target` against 2025.2 metadata.
+if pinned units disappear, refresh `targets/default/default.target` against 2026.1 metadata.
 
 ## Architecture, Style & Safety
 

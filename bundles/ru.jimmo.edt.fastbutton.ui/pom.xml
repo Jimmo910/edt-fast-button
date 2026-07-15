@@ -6,10 +6,10 @@
   <parent>
     <groupId>ru.jimmo.edt.fastbutton</groupId>
     <artifactId>bundles</artifactId>
-    <version>0.1.4-SNAPSHOT</version>
+    <version>0.1.5-SNAPSHOT</version>
   </parent>
   <artifactId>ru.jimmo.edt.fastbutton.ui</artifactId>
-  <version>0.1.4-SNAPSHOT</version>
+  <version>0.1.5-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 
   <properties>

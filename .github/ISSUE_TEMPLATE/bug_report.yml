@@ -17,7 +17,7 @@ body:
     id: edt-version
     attributes:
       label: EDT version
-      placeholder: 2025.2.x
+      placeholder: 2026.1.x
     validations:
       required: true
   - type: textarea
