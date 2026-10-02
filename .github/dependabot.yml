@@ -3,8 +3,16 @@ updates:
   - package-ecosystem: maven
     directory: /
     schedule:
-      interval: monthly
+      interval: quarterly
     open-pull-requests-limit: 5
+    # One PR per quarter for all minor/patch bumps; majors still arrive separately.
+    groups:
+      maven-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
     ignore:
       # EDT 2026.1 and this build intentionally target Java 17.
       - dependency-name: "org.eclipse.tycho:*"
@@ -17,5 +25,11 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: monthly
+      interval: quarterly
     open-pull-requests-limit: 5
+    # Grouping also keeps codeql-action/init and /analyze on the same version,
+    # which CodeQL requires.
+    groups:
+      github-actions:
+        patterns:
+          - "*"
