@@ -60,10 +60,13 @@ gh attestation verify edt-fast-button-<версия>.zip -R Jimmo910/edt-fast-bu
 
 ## Сборка и тестирование
 
-Нужны JDK 17 и Maven 3.9.4 или новее:
+Нужен JDK 17; Maven 3.9.16 скачивает Maven Wrapper (Maven 3.10+ с Tycho 4 не работает):
 
 ```shell
-mvn clean verify
+./mvnw clean verify
+
+# Windows
+mvnw.cmd clean verify
 ```
 
 Команда компилирует плагин, запускает JUnit и Checkstyle, проверяет покрытие JaCoCo и создаёт p2-архив в

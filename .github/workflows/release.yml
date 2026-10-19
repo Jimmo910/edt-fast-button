@@ -35,7 +35,7 @@ jobs:
         shell: bash
         run: |
           version="${GITHUB_REF_NAME#v}"
-          pom_version="$(mvn -q -DforceStdout help:evaluate -Dexpression=project.version)"
+          pom_version="$(./mvnw -q -DforceStdout help:evaluate -Dexpression=project.version)"
           if [[ "$pom_version" != "${version}-SNAPSHOT" ]]; then
             echo "Tag $GITHUB_REF_NAME does not match Maven version $pom_version." >&2
             exit 1
@@ -49,7 +49,7 @@ jobs:
 
       - name: Build release
         run: >-
-          mvn -B -ntp
+          ./mvnw -B -ntp
           -DforceContextQualifier=${{ steps.version.outputs.qualifier }}
           clean verify
 

@@ -21,6 +21,10 @@ updates:
       - dependency-name: "com.puppycrawl.tools:checkstyle"
         update-types:
           - "version-update:semver-major"
+      # The Maven Wrapper pins Maven 3.9.x; Tycho 4.0.13 does not start on Maven 3.10+ (lift with Tycho 5).
+      - dependency-name: "org.apache.maven:apache-maven"
+        versions:
+          - ">= 3.10.0"
 
   - package-ecosystem: github-actions
     directory: /
