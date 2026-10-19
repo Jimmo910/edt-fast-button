@@ -62,7 +62,7 @@ jobs:
       - name: Build and analyze
         if: env.SKIP_ANALYSIS != 'true'
         run: >-
-          mvn -B -ntp
+          ./mvnw -B -ntp
           -Dsonar.qualitygate.wait=true
           -Dsonar.qualitygate.timeout=300
           clean verify sonar:sonar

@@ -5,10 +5,14 @@ design and EDT compatibility can be discussed.
 
 ## Development setup
 
-Use JDK 17 and Maven 3.9.4 or newer. Run the complete quality gate from the repository root:
+Use JDK 17; the Maven Wrapper downloads Maven 3.9.16 (Maven 3.10+ does not work with Tycho 4). Run the complete
+quality gate from the repository root:
 
 ```shell
-mvn clean verify
+./mvnw clean verify
+
+# Windows
+mvnw.cmd clean verify
 ```
 
 The build downloads the EDT 2026.1 target platform. Tests must use temporary local Git repositories and must
@@ -26,7 +30,7 @@ not depend on credentials or external services.
 ## Pull requests
 
 Use a short imperative title and keep commits focused. Describe the user-visible behavior and safety implications,
-link related issues, and state that `mvn clean verify` passes. Include screenshots for preference-page, menu, or dialog
+link related issues, and state that `./mvnw clean verify` passes. Include screenshots for preference-page, menu, or dialog
 changes. Do not commit generated `target/` output, workspace metadata, credentials, or machine-specific paths.
 
 By contributing, you agree that your contribution is provided under EPL-2.0.

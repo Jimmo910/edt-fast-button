@@ -12,3 +12,6 @@
 *.jar binary
 *.zip binary
 *.png binary
+
+mvnw text eol=lf
+*.cmd text eol=crlf
